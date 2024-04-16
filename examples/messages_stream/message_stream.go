@@ -9,7 +9,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/dleviminzi/anthrogo"
+	"github.com/weak4/anthrogo"
 )
 
 func main() {

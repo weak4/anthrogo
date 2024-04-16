@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 
-	"github.com/dleviminzi/anthrogo/mocks"
+	"github.com/weak4/anthrogo/mocks"
 )
 
 func TestComplete(t *testing.T) {

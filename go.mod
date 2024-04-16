@@ -1,4 +1,4 @@
-module github.com/dleviminzi/anthrogo
+module github.com/weak4/anthrogo
 
 go 1.21
 

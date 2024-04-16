@@ -1,13 +1,13 @@
 # anthropic go (anthrogo)
-[![Go Reference](https://pkg.go.dev/badge/github.com/dleviminzi/anthrogo.svg)](https://pkg.go.dev/github.com/dleviminzi/anthrogo)
-[![Go Report Card](https://goreportcard.com/badge/github.com/dleviminzi/anthrogo)](https://goreportcard.com/report/github.com/dleviminzi/anthrogo)
-[![codecov](https://codecov.io/gh/dleviminzi/anthrogo/branch/main/graph/badge.svg?token=OP2W7ENYN5)](https://codecov.io/gh/dleviminzi/anthrogo)
+[![Go Reference](https://pkg.go.dev/badge/github.com/weak4/anthrogo.svg)](https://pkg.go.dev/github.com/weak4/anthrogo)
+[![Go Report Card](https://goreportcard.com/badge/github.com/weak4/anthrogo)](https://goreportcard.com/report/github.com/weak4/anthrogo)
+[![codecov](https://codecov.io/gh/weak4/anthrogo/branch/main/graph/badge.svg?token=OP2W7ENYN5)](https://codecov.io/gh/weak4/anthrogo)
 
 This is a simple client for using Anthropic's api to get claude completions. It is not an official client. Contributions are welcome!
-
+### This is a fork to make Image Recognition work, will be deleted after pull request merge
 ## Installation
 ```
-go get github.com/dleviminzi/anthrogo
+go get github.com/weak4/anthrogo
 ```
 
 ## Basic usage 
@@ -51,7 +51,7 @@ func main() {
 ```
 
 ## Message Streaming
-[message-streaming-example](https://github.com/dleviminzi/anthrogo/assets/51272568/4d7dafa6-4088-4c57-951a-97d7a9898408)
+[message-streaming-example](https://github.com/weak4/anthrogo/assets/51272568/4d7dafa6-4088-4c57-951a-97d7a9898408)
 ```go
 func main() {
 	c, err := anthrogo.NewClient()
@@ -145,7 +145,7 @@ func main() {
 ```
 
 ## Completion Streaming
-[streaming-completion-example (trimmed).webm](https://github.com/dleviminzi/go-anthropic/assets/51272568/14f80831-a53b-47bd-a8e3-67fe4c279df6)
+[streaming-completion-example (trimmed).webm](https://github.com/weak4/go-anthropic/assets/51272568/14f80831-a53b-47bd-a8e3-67fe4c279df6)
 <details>
 <summary>Code</summary>	
 	
