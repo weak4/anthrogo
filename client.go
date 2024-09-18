@@ -111,6 +111,13 @@ func WithVersion(version string) func(*Client) {
 	}
 }
 
+// WithCustomUrl is an option to set the base URL for the Client.
+func WithCustomUrl(url string) func(*Client) {
+	return func(c *Client) {
+		c.baseURL = url
+	}
+}
+
 // setRequestHeaders sets the necessary headers for the HTTP request.
 func (c *Client) setRequestHeaders(req *http.Request) {
 	req.Header.Set("Accept", "application/json")
