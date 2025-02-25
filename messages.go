@@ -44,6 +44,13 @@ type MessagePayload struct {
 	System *string `json:"system,omitempty"`
 	// Stream the response using server-sent events.
 	Stream *bool `json:"stream,omitempty"`
+	// Thinking support
+	Thinking *ThinkingBlock `json:"thinking,omitempty"`
+}
+
+type ThinkingBlock struct {
+	Type         string `json:"type"`
+	BudgetTokens int    `json:"budget_tokens"`
 }
 
 // Message is composed of a role and content. The role is either "user" or "assistant"
