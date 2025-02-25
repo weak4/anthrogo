@@ -203,11 +203,15 @@ func (d *MessageSSEDecoder) decodeData(event string) (EventData, error) {
 				}
 				eventData.Data = contentBlockStartData
 				if contentBlockStartData.ContentBlock.Thinking != "" {
-					eventData.Content = contentBlockStartData.ContentBlock.Thinking
-					d.updateContent(contentBlockStartData.Index, contentBlockStartData.ContentBlock.Thinking)
+					eventData.Content = "<think>" + contentBlockStartData.ContentBlock.Thinking
+					d.updateContent(contentBlockStartData.Index, eventData.Content)
 				} else {
-					eventData.Content = contentBlockStartData.ContentBlock.Text
-					d.updateContent(contentBlockStartData.Index, contentBlockStartData.ContentBlock.Text)
+					if contentBlockStartData.Index > 0 {
+						eventData.Content = "</think>" + contentBlockStartData.ContentBlock.Text
+					} else {
+						eventData.Content = contentBlockStartData.ContentBlock.Text
+					}
+					d.updateContent(contentBlockStartData.Index, eventData.Content)
 				}
 			case "ping":
 				var pingData PingData
