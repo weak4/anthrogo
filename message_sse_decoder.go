@@ -206,7 +206,11 @@ func (d *MessageSSEDecoder) decodeData(event string) (EventData, error) {
 					eventData.Content = "<think>" + contentBlockStartData.ContentBlock.Thinking
 					d.updateContent(contentBlockStartData.Index, eventData.Content)
 				} else {
-					eventData.Content = contentBlockStartData.ContentBlock.Text
+					if contentBlockStartData.Index > 0 {
+						eventData.Content = "</think>" + contentBlockStartData.ContentBlock.Text
+					} else {
+						eventData.Content = contentBlockStartData.ContentBlock.Text
+					}
 					d.updateContent(contentBlockStartData.Index, eventData.Content)
 				}
 			case "ping":
@@ -236,11 +240,7 @@ func (d *MessageSSEDecoder) decodeData(event string) (EventData, error) {
 				if err != nil {
 					return eventData, err
 				}
-				if contentBlockStopData.Type == "thinking" {
-					eventData.Content = "</think>"
-				}
 				eventData.Data = contentBlockStopData
-				d.updateContent(contentBlockStopData.Index, eventData.Content)
 			case "message_delta":
 				var messageDeltaData MessageDelta
 				err := json.Unmarshal([]byte(jsonData), &messageDeltaData)
