@@ -96,8 +96,9 @@ type MessageResponse struct {
 // ContentBlock is a block of content in a message response.
 // Currently the model will only return text content.
 type ContentBlock struct {
-	Type string `json:"type"`
-	Text string `json:"text,omitempty"`
+	Type     string `json:"type"`
+	Text     string `json:"text,omitempty"`
+	Thinking string `json:"thinking,omitempty"`
 }
 
 // Usage contains information about the number of input and output tokens.

@@ -45,8 +45,9 @@ type ContentBlockStart struct {
 	Type         string `json:"type"`
 	Index        int    `json:"index"`
 	ContentBlock struct {
-		Type string `json:"type"`
-		Text string `json:"text"`
+		Type     string `json:"type"`
+		Text     string `json:"text"`
+		Thinking string `json:"thinking"`
 	} `json:"content_block"`
 }
 
@@ -60,8 +61,9 @@ type ContentBlockDelta struct {
 	Type  string `json:"type"`
 	Index int    `json:"index"`
 	Delta struct {
-		Type string `json:"type"`
-		Text string `json:"text"`
+		Type     string `json:"type"`
+		Text     string `json:"text"`
+		Thinking string `json:"thinking"`
 	} `json:"delta"`
 }
 
@@ -200,8 +202,13 @@ func (d *MessageSSEDecoder) decodeData(event string) (EventData, error) {
 					return eventData, err
 				}
 				eventData.Data = contentBlockStartData
-				eventData.Content = contentBlockStartData.ContentBlock.Text
-				d.updateContent(contentBlockStartData.Index, contentBlockStartData.ContentBlock.Text)
+				if contentBlockStartData.ContentBlock.Thinking != "" {
+					eventData.Content = contentBlockStartData.ContentBlock.Thinking
+					d.updateContent(contentBlockStartData.Index, contentBlockStartData.ContentBlock.Thinking)
+				} else {
+					eventData.Content = contentBlockStartData.ContentBlock.Text
+					d.updateContent(contentBlockStartData.Index, contentBlockStartData.ContentBlock.Text)
+				}
 			case "ping":
 				var pingData PingData
 				err := json.Unmarshal([]byte(jsonData), &pingData)
@@ -216,8 +223,13 @@ func (d *MessageSSEDecoder) decodeData(event string) (EventData, error) {
 					return eventData, err
 				}
 				eventData.Data = contentBlockDeltaData
-				eventData.Content = contentBlockDeltaData.Delta.Text
-				d.updateContent(contentBlockDeltaData.Index, contentBlockDeltaData.Delta.Text)
+				if contentBlockDeltaData.Delta.Thinking != "" {
+					eventData.Content = contentBlockDeltaData.Delta.Thinking
+					d.updateContent(contentBlockDeltaData.Index, contentBlockDeltaData.Delta.Thinking)
+				} else {
+					eventData.Content = contentBlockDeltaData.Delta.Text
+					d.updateContent(contentBlockDeltaData.Index, contentBlockDeltaData.Delta.Text)
+				}
 			case "content_block_stop":
 				var contentBlockStopData ContentBlockStop
 				err := json.Unmarshal([]byte(jsonData), &contentBlockStopData)
